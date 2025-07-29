@@ -395,7 +395,8 @@
         return;
       }
       const itemList = cart.join(", ");
-      const message = `Hi SNACKS SOCIETY, I want to order these items: ${itemList}. My name is ${name}, address is ${address}, and phone number is ${phone}.`;
+     const message = `Hi SNACKS SOCIETY, I want to order these items:\n${itemList.map((item, index) => `${index + 1}. ${item}`).join('\n')}\n\nCustomer Info:\nName: ${name}\nAddress: ${address}\nPhone: ${phone}`;
+
       const url = `https://wa.me/233200872203?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
     }
