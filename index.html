@@ -394,7 +394,8 @@
         alert("Cart is empty.");
         return;
       }
-      const itemList = cart.join(", ");
+      const itemList = cart.map((item, index) => `${index + 1}. ${item}`).join('\n');
+
      const message = `Hi SNACKS SOCIETY, I want to order these items:\n${itemList.map((item, index) => `${index + 1}. ${item}`).join('\n')}\n\nCustomer Info:\nName: ${name}\nAddress: ${address}\nPhone: ${phone}`;
 
       const url = `https://wa.me/233200872203?text=${encodeURIComponent(message)}`;
@@ -422,6 +423,28 @@ function filterItems() {
     const text = item.innerText.toLowerCase();
     item.style.display = text.includes(query) ? "block" : "none";
   });
+}
+function checkout() {
+  if (cart.length === 0) {
+    alert("Your cart is empty!");
+    return;
+  }
+
+  const name = document.getElementById("customer-name").value;
+  const address = document.getElementById("customer-address").value;
+  const phone = document.getElementById("customer-phone").value;
+
+  if (!name || !address || !phone) {
+    alert("Please fill in all customer details.");
+    return;
+  }
+
+  const itemList = cart.map((item, index) => `${index + 1}. ${item}`).join('\n');
+
+  const message = `Hi SNACKS SOCIETY, I want to order these items:\n${itemList}\n\nCustomer Info:\nName: ${name}\nAddress: ${address}\nPhone: ${phone}`;
+
+  const url = `https://wa.me/233200872203?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
 }
 
   </script>
