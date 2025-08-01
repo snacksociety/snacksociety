@@ -242,7 +242,58 @@
     }
     #cartModal button.send-order:hover {
       background: #e56a00;
-    }
+    } 
+
+   .chatbot-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff7f50;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.chatbox {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  height: 350px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.chatlog {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+.chat-input {
+  display: flex;
+  border-top: 1px solid #eee;
+}
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 0 0 0 10px;
+}
+.chat-input button {
+  padding: 10px;
+  background: #ff7f50;
+  color: white;
+  border: none;
+  border-radius: 0 0 10px 0;
+  cursor: pointer;
+}
+ 
   </style>
 </head>
 <body>
@@ -325,7 +376,17 @@
       <input type="tel" id="customerPhone" placeholder="Your Phone Number" required>
       <button class="send-order" onclick="sendOrder()">Send Order via WhatsApp</button>
     </div>
+  </div> 
+  <!-- Chatbot Button + Box -->
+<button class="chatbot-btn" onclick="toggleChat()">💬</button>
+<div class="chatbox" id="chatbox">
+  <div class="chatlog" id="chatlog"></div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Ask SnackBot...">
+    <button onclick="handleChat()">Send</button>
   </div>
+</div>
+
 <script>
 const cart = [];
 const prices = {
@@ -428,7 +489,33 @@ function filterItems() {
     const text = item.innerText.toLowerCase();
     item.style.display = text.includes(query) ? "block" : "none";
   });
+} 
+
+  function toggleChat() {
+  const box = document.getElementById("chatbox");
+  box.style.display = box.style.display === "flex" ? "none" : "flex";
 }
+
+function handleChat() {
+  const input = document.getElementById("chatInput").value;
+  const log = document.getElementById("chatlog");
+  const lower = input.toLowerCase();
+  let reply = "Sorry, I didn’t get that.";
+
+  if (/\b(hi|hello|hey)\b/.test(lower)) reply = "Hey there! 👋 Looking for something tasty today?";
+  else if (lower.includes("cart")) reply = "🛒 Your cart is at the bottom right of the page!";
+  else if (lower.includes("deliver")) reply = "Yes! We offer delivery services right to your doorstep at a small fee.";
+  else if (lower.includes("chocolate")) reply = "Try our pop secrets and kitkats – they’re the best! 🍫";
+  else if (lower.includes("spicy")) reply = "You’ll love cheetos and doritos! 🌶️";
+  else if (lower.includes("recommend")) reply = "Let me recommend something... How about ruffles if you like crunchy snacks or m&m's if you're a fan of candies?";
+  else if (lower.includes("price")) reply = "Snacks range from 7 to 50 cedis. Great taste, small price!";
+  else if (lower.includes("thank")) reply = "It's snacksbot, Always at your service!";
+
+  log.innerHTML += `<div><b>You:</b> ${input}</div><div><b>SnackBot:</b> ${reply}</div>`;
+  document.getElementById("chatInput").value = "";
+  log.scrollTop = log.scrollHeight;
+}
+
 </script>
 </body>
 </html>
