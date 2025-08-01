@@ -493,10 +493,11 @@ function filterItems() {
     item.style.display = text.includes(query) ? "block" : "none";
   });
 } 
-
-  function toggleChat() {
+function toggleChat() {
   const box = document.getElementById("chatbox");
   box.style.display = box.style.display === "flex" ? "none" : "flex";
+}
+
 }
 
 function handleChat() {
@@ -577,7 +578,7 @@ function handleChat() {
   } else if (lower.includes("price")) {
     reply = random(replies.price);
   } else if (lower.includes("thank"))
-
+} 
 </script>
 </body>
 </html>
