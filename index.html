@@ -424,7 +424,6 @@ function addToCart(itemName) {
   cart.push(itemName);
   document.getElementById("cartCount").textContent = cart.length;
 
-  // Show popup
   const popup = document.getElementById("popupMessage");
   popup.style.display = "block";
   setTimeout(() => {
@@ -492,12 +491,11 @@ function filterItems() {
     const text = item.innerText.toLowerCase();
     item.style.display = text.includes(query) ? "block" : "none";
   });
-} 
+}
+
 function toggleChat() {
   const box = document.getElementById("chatbox");
   box.style.display = box.style.display === "flex" ? "none" : "flex";
-}
-
 }
 
 function handleChat() {
@@ -505,7 +503,6 @@ function handleChat() {
   const log = document.getElementById("chatlog");
   const lower = input.toLowerCase();
 
-  // Randomized reply options
   const replies = {
     greeting: [
       "Hey there! 👋 Looking for something tasty today?",
@@ -518,7 +515,7 @@ function handleChat() {
       "You’ll find your cart near the bottom right, next to the snacks!"
     ],
     deliver: [
-      "Yes! We deliver offer delivery service right to your doorstep at a small fee.",
+      "Yes! We offer delivery service right to your doorstep at a small fee.",
       "We got you! 🛵 Delivery is available at a small fee.",
       "Definitely! Delivery to your doorstep is just a click away!"
     ],
@@ -535,7 +532,7 @@ function handleChat() {
     recommend: [
       "How about our Lay's flavored chips if you like crunchy snacks?",
       "Try Ruffles for crunch, or M&M’s for something sweet! 🍬",
-      "Let me suggest cheetos – a crowd favorite!"
+      "Let me suggest Cheetos – a crowd favorite!"
     ],
     price: [
       "Snacks range from 7 to 50 cedis. Great taste, small price!",
@@ -559,10 +556,8 @@ function handleChat() {
     ]
   };
 
-  // Default fallback
   let reply = "Sorry, I didn’t get that.";
 
-  // Match keywords and choose random reply
   if (/\b(hi|hello|hey)\b/.test(lower)) {
     reply = random(replies.greeting);
   } else if (lower.includes("cart")) {
@@ -577,7 +572,7 @@ function handleChat() {
     reply = random(replies.recommend);
   } else if (lower.includes("price")) {
     reply = random(replies.price);
-   } else if (lower.includes("thank")) {
+  } else if (lower.includes("thank")) {
     reply = random(replies.thanks);
   } else if (lower.includes("how are you") || lower.includes("how're you")) {
     reply = random(replies.howareyou);
@@ -595,6 +590,5 @@ function random(arr) {
 }
 </script>
 
-</script>
 </body>
 </html>
