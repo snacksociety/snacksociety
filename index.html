@@ -577,8 +577,24 @@ function handleChat() {
     reply = random(replies.recommend);
   } else if (lower.includes("price")) {
     reply = random(replies.price);
-  } else if (lower.includes("thank"))
-} 
+   } else if (lower.includes("thank")) {
+    reply = random(replies.thanks);
+  } else if (lower.includes("how are you") || lower.includes("how're you")) {
+    reply = random(replies.howareyou);
+  } else if (lower.includes("who founded")) {
+    reply = random(replies.founder);
+  }
+
+  log.innerHTML += `<div><b>You:</b> ${input}</div><div><b>SnackBot:</b> ${reply}</div>`;
+  document.getElementById("chatInput").value = "";
+  log.scrollTop = log.scrollHeight;
+}
+
+function random(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+</script>
+
 </script>
 </body>
 </html>
