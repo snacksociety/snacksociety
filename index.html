@@ -275,6 +275,7 @@
   padding: 10px;
   overflow-y: auto;
   font-size: 0.9rem;
+  color: #000;
 }
 .chat-input {
   display: flex;
@@ -285,6 +286,7 @@
   padding: 10px;
   border: none;
   border-radius: 0 0 0 10px;
+  color: #000;
 }
 .chat-input button {
   padding: 10px;
@@ -501,21 +503,80 @@ function handleChat() {
   const input = document.getElementById("chatInput").value;
   const log = document.getElementById("chatlog");
   const lower = input.toLowerCase();
+
+  // Randomized reply options
+  const replies = {
+    greeting: [
+      "Hey there! 👋 Looking for something tasty today?",
+      "Hello snack lover! 🍭 What can I get you?",
+      "Hi! Ready to find your next favorite treat? 😋"
+    ],
+    cart: [
+      "🛒 Your cart is at the bottom right of the page!",
+      "Cart's waiting for you down there 👉",
+      "You’ll find your cart near the bottom right, next to the snacks!"
+    ],
+    deliver: [
+      "Yes! We deliver offer delivery service right to your doorstep at a small fee.",
+      "We got you! 🛵 Delivery is available at a small fee.",
+      "Definitely! Delivery to your doorstep is just a click away!"
+    ],
+    chocolate: [
+      "Try our m&m's – they’re the best! 🍫",
+      "Mmm... you’ll love the Mr Goodbar and KitKats!",
+      "Chocolate fan? Don’t miss out on our best sellers, Snickers!"
+    ],
+    spicy: [
+      "You’ll love Hot Chips and Plantain Crackers! 🌶️",
+      "Feeling bold? Try some spicy Cheetos or Doritos 🔥",
+      "Spice up your day with our fiery snack lineup!"
+    ],
+    recommend: [
+      "How about our Lay's flavored chips if you like crunchy snacks?",
+      "Try Ruffles for crunch, or M&M’s for something sweet! 🍬",
+      "Let me suggest cheetos – a crowd favorite!"
+    ],
+    price: [
+      "Snacks range from 7 to 50 cedis. Great taste, small price!",
+      "Prices start at just 7 cedis – affordable & yummy!",
+      "From 7 to 50 cedis, there’s something for every wallet!"
+    ],
+    thanks: [
+      "It's SnackBot, always at your service! 🍪",
+      "You're welcome! I'm here to help anytime 😎",
+      "No problem – happy snacking! 🎉"
+    ],
+    howareyou: [
+      "I'm doing great and always ready to help you snack! 😄",
+      "Buzzing with snack energy! How about you?",
+      "I’m good! Just keeping snacks in check 🍭"
+    ],
+    founder: [
+      "Snacks Society was founded by passionate snack lovers, Lois and Chelsea! 🍿 Want a taste?",
+      "It all started with two snack queens — Lois and Chelsea 😋",
+      "Lois & Chelsea built Snacks Society with love and crunch! 💕"
+    ]
+  };
+
+  // Default fallback
   let reply = "Sorry, I didn’t get that.";
 
-  if (/\b(hi|hello|hey)\b/.test(lower)) reply = "Hey there! 👋 Looking for something tasty today?";
-  else if (lower.includes("cart")) reply = "🛒 Your cart is at the bottom right of the page!";
-  else if (lower.includes("deliver")) reply = "Yes! We offer delivery services right to your doorstep at a small fee.";
-  else if (lower.includes("chocolate")) reply = "Try our pop secrets and kitkats – they’re the best! 🍫";
-  else if (lower.includes("spicy")) reply = "You’ll love cheetos and doritos! 🌶️";
-  else if (lower.includes("recommend")) reply = "Let me recommend something... How about ruffles if you like crunchy snacks or m&m's if you're a fan of candies?";
-  else if (lower.includes("price")) reply = "Snacks range from 7 to 50 cedis. Great taste, small price!";
-  else if (lower.includes("thank")) reply = "It's snacksbot, Always at your service!";
-
-  log.innerHTML += `<div><b>You:</b> ${input}</div><div><b>SnackBot:</b> ${reply}</div>`;
-  document.getElementById("chatInput").value = "";
-  log.scrollTop = log.scrollHeight;
-}
+  // Match keywords and choose random reply
+  if (/\b(hi|hello|hey)\b/.test(lower)) {
+    reply = random(replies.greeting);
+  } else if (lower.includes("cart")) {
+    reply = random(replies.cart);
+  } else if (lower.includes("deliver")) {
+    reply = random(replies.deliver);
+  } else if (lower.includes("chocolate")) {
+    reply = random(replies.chocolate);
+  } else if (lower.includes("spicy")) {
+    reply = random(replies.spicy);
+  } else if (lower.includes("recommend")) {
+    reply = random(replies.recommend);
+  } else if (lower.includes("price")) {
+    reply = random(replies.price);
+  } else if (lower.includes("thank"))
 
 </script>
 </body>
